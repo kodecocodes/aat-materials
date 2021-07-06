@@ -1,4 +1,4 @@
-package com.hackertronix.cinematic.data.sources.cache
+package com.hackertronix.cinematic.data.sources
 
 import androidx.room.Dao
 import androidx.room.Insert

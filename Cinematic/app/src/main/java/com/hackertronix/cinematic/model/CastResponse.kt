@@ -1,8 +1,14 @@
 package com.hackertronix.cinematic.model
 
-import com.google.gson.annotations.SerializedName
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import androidx.room.TypeConverters
+import com.hackertronix.cinematic.data.sources.CastTypeConverter
 
+@Entity(tableName = "castResponse")
 data class CastResponse(
-    @SerializedName("cast")
+    @PrimaryKey
+    val id: Int,
+    @TypeConverters(CastTypeConverter::class)
     val cast: List<Cast> = emptyList()
 )

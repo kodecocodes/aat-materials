@@ -1,6 +1,7 @@
 package com.hackertronix.cinematic.data.repository
 
 import com.hackertronix.cinematic.model.Cast
+import com.hackertronix.cinematic.model.CastResponse
 import com.hackertronix.cinematic.model.Movie
 import kotlinx.coroutines.flow.Flow
 
@@ -22,4 +23,5 @@ interface MoviesRepository {
 
     suspend fun removeFavourite(id: Int)
 
+    suspend fun saveCast(cast: List<CastResponse>)
 }

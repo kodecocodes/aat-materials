@@ -22,7 +22,6 @@ class CastAdapter : ListAdapter<Cast, CastAdapter.CastViewHolder>(CastDiffCallba
         holder.bind(getItem(position))
     }
 
-
     inner class CastViewHolder(val binding: ItemCastBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(cast: Cast) {
