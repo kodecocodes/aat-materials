@@ -1,5 +1,7 @@
-package com.hackertronix.cinematic.data.sources.cache
+package com.hackertronix.cinematic.data.sources
 
+import com.hackertronix.cinematic.model.Cast
+import com.hackertronix.cinematic.model.CastResponse
 import com.hackertronix.cinematic.model.Movie
 import kotlinx.coroutines.flow.Flow
 
@@ -19,4 +21,7 @@ interface MoviesCache {
 
     suspend fun removeFavourite(id: Int)
 
+    suspend fun getCastDetails(id: Int): List<Cast>
+
+    suspend fun saveCast(cast: List<CastResponse>)
 }
