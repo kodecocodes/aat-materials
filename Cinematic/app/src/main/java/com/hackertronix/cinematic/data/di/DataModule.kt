@@ -4,13 +4,11 @@ import android.app.Application
 import androidx.room.Room
 import com.hackertronix.cinematic.data.MoviesDataRepository
 import com.hackertronix.cinematic.data.repository.MoviesRepository
-import com.hackertronix.cinematic.data.sources.cache.MoviesCache
-import com.hackertronix.cinematic.data.sources.cache.MoviesDao
-import com.hackertronix.cinematic.data.sources.cache.MoviesDatabase
-import com.hackertronix.cinematic.data.sources.remote.MoviesRemote
-import com.hackertronix.cinematic.data.sources.remote.TMDBService
+import com.hackertronix.cinematic.data.sources.CastDao
+import com.hackertronix.cinematic.data.sources.MoviesCache
+import com.hackertronix.cinematic.data.sources.MoviesDao
+import com.hackertronix.cinematic.data.sources.MoviesDatabase
 import com.hackertronix.cinematic.data.store.MovieCacheStore
-import com.hackertronix.cinematic.data.store.MoviesRemoteStore
 import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module
 
@@ -26,15 +24,17 @@ val dataModule = module {
         return database.moviesDao
     }
 
-    single { TMDBService.makeTMDBService() }
+    fun provideCastDao(database: MoviesDatabase): CastDao {
+        return database.castDao
+    }
 
     single { provideDatabase(androidApplication()) }
 
     single { provideMoviesDao(get()) }
 
-    factory<MoviesCache> { MovieCacheStore(get()) }
+    single { provideCastDao(get()) }
 
-    factory<MoviesRemote> { MoviesRemoteStore(get()) }
+    factory<MoviesCache> { MovieCacheStore(get(), get()) }
 
-    factory<MoviesRepository> { MoviesDataRepository(get(), get()) }
+    factory<MoviesRepository> { MoviesDataRepository(get()) }
 }
