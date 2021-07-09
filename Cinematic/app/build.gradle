@@ -13,7 +13,7 @@ android {
     buildToolsVersion "30.0.2"
 
     defaultConfig {
-        applicationId "com.hackertronix.cinematic"
+        applicationId "com.raywenderlich.cinematic"
         minSdkVersion 23
         targetSdkVersion 30
         versionCode 1
