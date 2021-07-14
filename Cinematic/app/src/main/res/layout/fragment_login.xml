@@ -7,16 +7,6 @@
   android:background="@drawable/login_gradient_background"
   android:fitsSystemWindows="true">
 
-  <ImageView
-    android:layout_width="0dp"
-    android:layout_height="0dp"
-    android:scaleType="center"
-    android:src="@drawable/posters_grid"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
-
   <View
     android:layout_width="0dp"
     android:layout_height="0dp"
