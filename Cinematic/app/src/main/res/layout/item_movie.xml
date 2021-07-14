@@ -3,9 +3,9 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   android:layout_width="match_parent"
   android:layout_height="250dp"
-  android:layout_marginEnd="8dp"
   android:layout_marginStart="8dp"
   android:layout_marginTop="8dp"
+  android:layout_marginEnd="8dp"
   app:cardCornerRadius="16dp">
 
   <androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
@@ -20,21 +20,30 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent" />
 
-    <RatingBar
-      android:id="@+id/movieRating"
-      style="@style/Widget.AppCompat.RatingBar.Small"
+    <View
+      android:id="@+id/scrim"
+      android:layout_width="wrap_content"
+      android:layout_height="120dp"
+      android:background="@drawable/drawable_rounded_corner"
+      app:layout_constraintBottom_toBottomOf="@+id/background"
+      app:layout_constraintStart_toStartOf="@+id/background" />
+
+    <TextView
+      android:id="@+id/movieName"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginStart="32dp"
-      android:isIndicator="true"
-      android:numStars="5"
-      android:progressTint="@color/primaryDarkColor"
-      android:rating="3.5"
-      android:scaleX="1.5"
-      android:scaleY="1.5"
-      app:layout_constraintBottom_toBottomOf="@id/ratingValue"
-      app:layout_constraintStart_toEndOf="@id/ratingValue"
-      app:layout_constraintTop_toTopOf="@id/ratingValue" />
+      android:layout_margin="16dp"
+      android:layout_marginStart="16dp"
+      android:ellipsize="end"
+      android:fontFamily="@font/chivo_bold"
+      android:maxWidth="300dp"
+      android:maxLines="1"
+      android:textColor="@color/primaryTextColor"
+      android:textSize="18sp"
+      android:textStyle="bold"
+      app:layout_constraintStart_toStartOf="@id/background"
+      app:layout_constraintTop_toTopOf="@id/scrim"
+      tools:text="Star Wars: Rise of Skywalker" />
 
     <TextView
       android:id="@+id/movieInfo"
@@ -54,9 +63,9 @@
       android:id="@+id/ratingValue"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginBottom="4dp"
       android:layout_marginStart="16dp"
       android:layout_marginTop="8dp"
+      android:layout_marginBottom="4dp"
       android:fontFamily="@font/rubik_one"
       android:letterSpacing="-0.1"
       android:textColor="@color/primaryTextColor"
@@ -66,30 +75,21 @@
       app:layout_constraintTop_toBottomOf="@id/movieInfo"
       tools:text="4.2" />
 
-    <TextView
-      android:id="@+id/movieName"
+    <RatingBar
+      android:id="@+id/movieRating"
+      style="@style/Widget.AppCompat.RatingBar.Small"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_margin="16dp"
-      android:layout_marginStart="16dp"
-      android:ellipsize="end"
-      android:fontFamily="@font/chivo_bold"
-      android:maxLines="1"
-      android:maxWidth="300dp"
-      android:textColor="@color/primaryTextColor"
-      android:textSize="18sp"
-      android:textStyle="bold"
-      app:layout_constraintStart_toStartOf="@id/background"
-      app:layout_constraintTop_toTopOf="@id/scrim"
-      tools:text="Star Wars: Rise of Skywalker" />
-
-    <View
-      android:id="@+id/scrim"
-      android:layout_width="wrap_content"
-      android:layout_height="120dp"
-      android:background="@drawable/drawable_rounded_corner"
-      app:layout_constraintBottom_toBottomOf="@+id/background"
-      app:layout_constraintStart_toStartOf="@+id/background" />
+      android:layout_marginStart="32dp"
+      android:isIndicator="true"
+      android:numStars="5"
+      android:progressTint="@color/primaryDarkColor"
+      android:rating="3.5"
+      android:scaleX="1.5"
+      android:scaleY="1.5"
+      app:layout_constraintBottom_toBottomOf="@id/ratingValue"
+      app:layout_constraintStart_toEndOf="@id/ratingValue"
+      app:layout_constraintTop_toTopOf="@id/ratingValue" />
 
 
   </androidx.constraintlayout.widget.ConstraintLayout>

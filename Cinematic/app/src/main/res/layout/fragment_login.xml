@@ -7,31 +7,20 @@
   android:background="@drawable/login_gradient_background"
   android:fitsSystemWindows="true">
 
-  <Button
-    android:id="@+id/loginButton"
-    android:layout_width="0dp"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="32dp"
-    android:layout_marginEnd="16dp"
-    android:layout_marginStart="16dp"
-    android:backgroundTint="#087FA5"
-    android:fontFamily="@font/rubik_regular"
-    android:letterSpacing="0"
-    android:paddingBottom="16dp"
-    android:paddingTop="16dp"
-    android:text="@string/login"
-    android:textAllCaps="false"
-    android:textColor="@android:color/white"
-    android:textSize="16sp"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent" />
-
   <ImageView
     android:layout_width="0dp"
     android:layout_height="0dp"
     android:scaleType="center"
     android:src="@drawable/posters_grid"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+  <View
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:background="@drawable/login_gradient_background"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
@@ -50,14 +39,26 @@
     app:layout_constraintTop_toTopOf="parent"
     tools:ignore="HardcodedText" />
 
-  <View
-    android:layout_width="0dp"
-    android:layout_height="0dp"
-    android:background="@drawable/login_gradient_background"
-    app:layout_constraintBottom_toBottomOf="parent"
+  <com.google.android.material.textfield.TextInputLayout
+    android:id="@+id/email_input"
+    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    android:hint="@string/email"
+    android:textColorHint="@android:color/white"
+    app:boxStrokeColor="@color/login_input_color"
+    app:layout_constraintBottom_toTopOf="@id/password_input"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
+    app:layout_constraintStart_toStartOf="parent">
+
+    <com.google.android.material.textfield.TextInputEditText
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:fontFamily="@font/rubik_regular"
+      android:textColor="@android:color/white" />
+
+  </com.google.android.material.textfield.TextInputLayout>
 
   <com.google.android.material.textfield.TextInputLayout
     android:id="@+id/password_input"
@@ -80,25 +81,24 @@
 
   </com.google.android.material.textfield.TextInputLayout>
 
-  <com.google.android.material.textfield.TextInputLayout
-    android:id="@+id/email_input"
-    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-    android:layout_width="match_parent"
+  <Button
+    android:id="@+id/loginButton"
+    android:layout_width="0dp"
     android:layout_height="wrap_content"
-    android:layout_margin="16dp"
-    android:hint="@string/email"
-    android:textColorHint="@android:color/white"
-    app:boxStrokeColor="@color/login_input_color"
-    app:layout_constraintBottom_toTopOf="@id/password_input"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginBottom="32dp"
+    android:backgroundTint="#087FA5"
+    android:fontFamily="@font/rubik_regular"
+    android:letterSpacing="0"
+    android:paddingTop="16dp"
+    android:paddingBottom="16dp"
+    android:text="@string/login"
+    android:textAllCaps="false"
+    android:textColor="@android:color/white"
+    android:textSize="16sp"
+    app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent">
-
-    <com.google.android.material.textfield.TextInputEditText
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:fontFamily="@font/rubik_regular"
-      android:textColor="@android:color/white" />
-
-  </com.google.android.material.textfield.TextInputLayout>
+    app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
