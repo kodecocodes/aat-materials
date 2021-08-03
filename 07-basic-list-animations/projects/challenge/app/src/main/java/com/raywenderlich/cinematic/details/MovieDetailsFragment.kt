@@ -31,80 +31,102 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.raywenderlich.cinematic.popular
+package com.raywenderlich.cinematic.details
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
-import com.raywenderlich.cinematic.MoviesAdapter
+import androidx.lifecycle.Observer
+import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
+import coil.load
+import coil.transform.BlurTransformation
 import com.raywenderlich.cinematic.R
-import com.raywenderlich.cinematic.databinding.FragmentPopularBinding
+import com.raywenderlich.cinematic.databinding.FragmentDetailsBinding
 import com.raywenderlich.cinematic.model.Movie
-import com.raywenderlich.cinematic.util.Events.Done
-import com.raywenderlich.cinematic.util.Events.Loading
-import com.raywenderlich.cinematic.util.MovieListClickListener
+import com.raywenderlich.cinematic.util.Constants.IMAGE_BASE
 import org.koin.android.ext.android.inject
+import org.koin.android.viewmodel.ext.android.viewModel
 
-class PopularMoviesFragment : Fragment(R.layout.fragment_popular) {
-  private var _binding: FragmentPopularBinding? = null
+class MovieDetailsFragment : Fragment(R.layout.fragment_details) {
+
+  private var _binding: FragmentDetailsBinding? = null
   private val binding get() = _binding!!
 
-  private val viewModel: PopularMoviesViewModel by inject()
-  private val popularAdapter: MoviesAdapter by inject()
+  private val args: MovieDetailsFragmentArgs by navArgs()
+  private val viewModel: MovieDetailsViewModel by viewModel()
+
+  private val castAdapter: CastAdapter by inject()
 
   override fun onCreateView(
-    inflater: LayoutInflater,
-    container: ViewGroup?,
-    savedInstanceState: Bundle?,
+      inflater: LayoutInflater,
+      container: ViewGroup?,
+      savedInstanceState: Bundle?,
   ): View {
-    _binding = FragmentPopularBinding.inflate(inflater, container, false)
+    _binding = FragmentDetailsBinding.inflate(inflater, container, false)
     return binding.root
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    popularAdapter.setListener(object : MovieListClickListener {
-      override fun onMovieClicked(movie: Movie) {
-        findNavController().navigate(
-          PopularMoviesFragmentDirections.actionPopularMoviesFragmentToMovieDetailsFragment(movie.id)
-        )
-      }
-
-    })
-    binding.popularMoviesList.apply {
-      adapter = popularAdapter
-      itemAnimator = MyItemAnimator()
+    binding.castList.apply {
+      adapter = castAdapter
+      layoutManager =
+          LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
     }
 
-    viewModel.getPopularMovies()
+    args.movieId.also {
+      viewModel.getMovieDetails(it)
+      viewModel.getCast(it)
+    }
     attachObservers()
   }
 
   private fun attachObservers() {
-    viewModel.movies.observe(viewLifecycleOwner, { movies ->
-      popularAdapter.submitList(movies)
+    viewModel.movie.observe(viewLifecycleOwner, { movie ->
+      renderUi(movie)
     })
 
-    viewModel.events.observe(viewLifecycleOwner, { event ->
-      when (event) {
-        is Loading -> {
-          binding.progressBar.visibility = View.VISIBLE
-          binding.popularMoviesList.visibility = View.GONE
-        }
-
-        is Done -> {
-          binding.progressBar.visibility = View.GONE
-          binding.popularMoviesList.visibility = View.VISIBLE
-        }
-      }
+    viewModel.cast.observe(viewLifecycleOwner, { cast ->
+      castAdapter.submitList(cast)
     })
   }
 
-  override fun onDestroyView() {
-    super.onDestroyView()
-    _binding = null
+  private fun renderUi(movie: Movie) {
+    binding.backdrop.load(IMAGE_BASE + movie.backdropPath) {
+      crossfade(true)
+      transformations(BlurTransformation(requireContext()))
+    }
+    binding.poster.load(IMAGE_BASE + movie.posterPath) {
+      crossfade(true)
+    }
+
+    binding.title.text = movie.title
+    binding.summary.text = movie.overview
+    binding.ratingValue.text = movie.rating.toString()
+    binding.movieRating.rating = movie.rating
+
+    binding.addToFavourites.apply {
+      icon = if (movie.isFavourite) {
+        getDrawable(requireContext(), R.drawable.ic_baseline_favorite_24)
+      } else {
+        getDrawable(requireContext(), R.drawable.ic_baseline_favorite_border_24)
+      }
+      text = if (movie.isFavourite) {
+        getString(R.string.remove_from_favourites)
+      } else {
+        getString(R.string.add_to_favourites)
+      }
+      setOnClickListener {
+        if (movie.isFavourite) {
+          viewModel.unsetMovieAsFavourite(movie.id)
+        } else {
+          viewModel.setMovieAsFavourite(movie.id)
+        }
+      }
+    }
   }
 }
