@@ -109,10 +109,7 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_details) {
     binding.ratingValue.text = movie.rating.toString()
     binding.movieRating.rating = movie.rating
 
-    animateText(binding.title)
     animateText(binding.summary)
-    animateText(binding.ratingValue)
-    animateText(binding.movieRating)
 
     binding.addToFavourites.apply {
       icon = if (movie.isFavourite) {

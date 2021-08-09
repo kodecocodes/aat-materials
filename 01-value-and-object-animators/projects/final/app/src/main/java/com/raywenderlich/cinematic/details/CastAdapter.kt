@@ -69,23 +69,9 @@ class CastAdapter : ListAdapter<Cast, CastAdapter.CastViewHolder>(CastDiffCallba
         .transformations(CircleCropTransformation())
         .target {
           binding.castImage.setImageDrawable(it)
-          animateImage(binding.castImage)
         }.build()
 
       context.imageLoader.enqueue(imageRequest)
-    }
-
-    private fun animateImage(castImage: ImageView) {
-      val objectAnimator = ObjectAnimator.ofFloat(
-        castImage,
-        "alpha",
-        0f,
-        1f
-      )
-
-      objectAnimator.duration = 1500
-      objectAnimator.interpolator = AccelerateInterpolator()
-      objectAnimator.start()
     }
 
   }
