@@ -34,12 +34,18 @@
 package com.raywenderlich.cinematic.login
 
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.transition.Slide
+import androidx.transition.TransitionSet
+import com.google.android.material.transition.Hold
 import com.google.android.material.transition.MaterialSharedAxis
+import com.raywenderlich.cinematic.R
 import com.raywenderlich.cinematic.databinding.FragmentSignupBinding
 
 class SignupFragment : Fragment() {
@@ -50,6 +56,11 @@ class SignupFragment : Fragment() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
+    enterTransition = TransitionSet().apply {
+      ordering = TransitionSet.ORDERING_SEQUENTIAL
+      addTransition(Hold())
+      addTransition(Slide(Gravity.TOP).addTarget(R.id.signup_logo).setDuration(700))
+    }
     returnTransition = MaterialSharedAxis(MaterialSharedAxis.X, false).apply {
       duration = 1000
     }
@@ -68,6 +79,10 @@ class SignupFragment : Fragment() {
     super.onViewCreated(view, savedInstanceState)
     binding.signUpButton.setOnClickListener {
       viewModel.onSignupPressed()
+    }
+    activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner) {
+      binding.root.isTransitionGroup = true
+      parentFragmentManager.popBackStack()
     }
   }
 

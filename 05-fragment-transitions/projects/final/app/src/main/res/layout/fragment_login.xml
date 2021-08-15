@@ -5,6 +5,7 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   android:background="@drawable/login_gradient_background"
+  android:transitionGroup="false"
   android:fitsSystemWindows="true">
 
   <View
@@ -17,6 +18,7 @@
     app:layout_constraintTop_toTopOf="parent" />
 
   <TextView
+    android:id="@+id/login_logo"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginTop="16dp"
