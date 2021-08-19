@@ -34,16 +34,11 @@
 package com.raywenderlich.cinematic.login
 
 import android.os.Bundle
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.transition.Slide
-import com.google.android.material.transition.MaterialSharedAxis
-import com.raywenderlich.cinematic.R
 import com.raywenderlich.cinematic.databinding.FragmentLoginBinding
 
 class LoginFragment : Fragment() {
@@ -51,14 +46,6 @@ class LoginFragment : Fragment() {
 
   private var _binding: FragmentLoginBinding? = null
   private val binding get() = _binding!!
-
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    enterTransition = Slide(Gravity.TOP).addTarget(R.id.login_logo).setDuration(700)
-    returnTransition = MaterialSharedAxis(MaterialSharedAxis.X, false).apply {
-      duration = 1000
-    }
-  }
 
   override fun onCreateView(
       inflater: LayoutInflater, container: ViewGroup?,
@@ -73,10 +60,6 @@ class LoginFragment : Fragment() {
     super.onViewCreated(view, savedInstanceState)
     binding.loginButton.setOnClickListener {
       viewModel.onLoginPressed()
-    }
-    activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner) {
-      binding.root.isTransitionGroup = true
-      parentFragmentManager.popBackStack()
     }
   }
 
