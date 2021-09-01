@@ -56,6 +56,7 @@ class FavoriteMoviesFragment : Fragment(R.layout.fragment_favorites) {
 
   private val viewModel: FavouriteMoviesViewModel by inject()
   private val animationViewModel: AnimationViewModel by sharedViewModel()
+  private var hasAnimatedIn = false
   private val favouritesAdapter: MoviesAdapter by inject()
 
   override fun onCreateView(
@@ -88,12 +89,8 @@ class FavoriteMoviesFragment : Fragment(R.layout.fragment_favorites) {
       favouritesAdapter.submitList(movies)
     })
     animationViewModel.animateEntranceLiveData.observe(viewLifecycleOwner, { shouldAnimate ->
-      if (binding.root.visibility == View.INVISIBLE) {
-        if (shouldAnimate) {
-          animateContentIn()
-        } else {
-          binding.root.visibility = View.VISIBLE
-        }
+      if (shouldAnimate && !hasAnimatedIn) {
+        animateContentIn()
       }
     })
     viewModel.events.observe(viewLifecycleOwner, { event ->

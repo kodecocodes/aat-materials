@@ -40,6 +40,7 @@ import android.view.ViewAnimationUtils
 import android.view.ViewGroup
 import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.distinctUntilChanged
 import androidx.navigation.fragment.findNavController
 import com.raywenderlich.cinematic.AnimationViewModel
 import com.raywenderlich.cinematic.MoviesAdapter
@@ -55,9 +56,9 @@ import kotlin.math.hypot
 class FavoriteMoviesFragment : Fragment(R.layout.fragment_favorites) {
   private var _binding: FragmentFavoritesBinding? = null
   private val binding get() = _binding!!
-
   private val viewModel: FavouriteMoviesViewModel by inject()
   private val animationViewModel: AnimationViewModel by sharedViewModel()
+  private var hasAnimatedIn = false
   private val favouritesAdapter: MoviesAdapter by inject()
 
   override fun onCreateView(
@@ -92,10 +93,10 @@ class FavoriteMoviesFragment : Fragment(R.layout.fragment_favorites) {
       val cy = view.height
       val finalRadius = hypot(view.width.toDouble(), view.height.toDouble())
       val anim = ViewAnimationUtils.createCircularReveal(view, cx, cy, 0f, finalRadius.toFloat())
-      view.visibility = View.VISIBLE
       anim.duration = 600
       anim.start()
     }
+    hasAnimatedIn = true
   }
 
   private fun attachObservers() {
@@ -103,14 +104,10 @@ class FavoriteMoviesFragment : Fragment(R.layout.fragment_favorites) {
       favouritesAdapter.submitList(movies)
     })
     animationViewModel.animateEntranceLiveData.observe(viewLifecycleOwner, { shouldAnimate ->
-      if (binding.root.visibility == View.INVISIBLE) {
-        if (shouldAnimate) {
+        if (shouldAnimate && !hasAnimatedIn) {
           animateContentIn()
-        } else {
-          binding.root.visibility = View.VISIBLE
         }
-      }
-    })
+      })
     viewModel.events.observe(viewLifecycleOwner, { event ->
       when (event) {
         is Events.Loading -> {
