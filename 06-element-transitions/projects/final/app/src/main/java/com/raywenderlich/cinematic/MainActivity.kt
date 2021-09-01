@@ -44,7 +44,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 class MainActivity : AppCompatActivity() {
   private val viewModel: AnimationViewModel by viewModel()
   lateinit var binding: ActivityMainBinding
-  var lastBackstackEntry = 0
+  private var lastBackstackEntry = 0
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)

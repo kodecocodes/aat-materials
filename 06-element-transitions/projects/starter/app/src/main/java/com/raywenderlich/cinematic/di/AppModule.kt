@@ -33,6 +33,7 @@
  */
 package com.raywenderlich.cinematic.di
 
+import com.raywenderlich.cinematic.AnimationViewModel
 import com.raywenderlich.cinematic.MoviesAdapter
 import com.raywenderlich.cinematic.details.CastAdapter
 import com.raywenderlich.cinematic.details.MovieDetailsViewModel
@@ -48,6 +49,8 @@ val appModule = module {
   viewModel { FavouriteMoviesViewModel(get()) }
 
   viewModel { MovieDetailsViewModel(get()) }
+
+  viewModel { AnimationViewModel() }
 
   factory { MoviesAdapter() }
 

@@ -42,11 +42,12 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.transition.Slide
 import androidx.transition.TransitionManager
 import com.raywenderlich.cinematic.databinding.ActivityMainBinding
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
-
+  private val viewModel: AnimationViewModel by viewModel()
   lateinit var binding: ActivityMainBinding
-  private var comingFromDetails = false
+  private var lastBackstackEntry = 0
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -59,33 +60,22 @@ class MainActivity : AppCompatActivity() {
     val navController = navHostFragment.navController
     binding.bottomNav.setupWithNavController(navController)
     navController.addOnDestinationChangedListener { _, destination, _ ->
-
       when (destination.id) {
-        R.id.movieDetailsFragment -> {
-          animateBottomTabVisibility()
-          comingFromDetails = true
-        }
-        else -> {
-          if (comingFromDetails) {
-            animateBottomTabVisibility()
-          }
-          comingFromDetails = false
-        }
+        R.id.movieDetailsFragment -> binding.bottomNav.visibility = View.GONE
+        else -> binding.bottomNav.visibility = View.VISIBLE
       }
+
+      val shouldTriggerAnimation = (
+          lastBackstackEntry == R.id.popularMoviesFragment &&
+              destination.id == R.id.favoriteMoviesFragment
+          ) || (
+          lastBackstackEntry == R.id.favoriteMoviesFragment &&
+              destination.id == R.id.popularMoviesFragment
+          )
+
+      viewModel.animateEntranceLiveData.value = shouldTriggerAnimation
+      lastBackstackEntry = destination.id
     }
-  }
-
-  override fun onEnterAnimationComplete() {
-    super.onEnterAnimationComplete()
-    animateBottomTabVisibility()
-  }
-
-  private fun animateBottomTabVisibility() {
-    val slide = Slide(Gravity.BOTTOM)
-    slide.addTarget(binding.bottomNav)
-    TransitionManager.beginDelayedTransition(binding.root, slide)
-    binding.bottomNav.visibility =
-      if (binding.bottomNav.visibility == View.VISIBLE) View.GONE else View.VISIBLE
   }
 
   override fun finish() {

@@ -36,10 +36,13 @@ package com.raywenderlich.cinematic.popular
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewAnimationUtils
 import android.view.ViewGroup
+import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.raywenderlich.cinematic.AnimationViewModel
 import com.raywenderlich.cinematic.MoviesAdapter
 import com.raywenderlich.cinematic.R
 import com.raywenderlich.cinematic.databinding.FragmentPopularBinding
@@ -48,12 +51,15 @@ import com.raywenderlich.cinematic.util.Events.Done
 import com.raywenderlich.cinematic.util.Events.Loading
 import com.raywenderlich.cinematic.util.MovieListClickListener
 import org.koin.android.ext.android.inject
+import org.koin.android.viewmodel.ext.android.sharedViewModel
+import kotlin.math.hypot
 
 class PopularMoviesFragment : Fragment(R.layout.fragment_popular) {
   private var _binding: FragmentPopularBinding? = null
   private val binding get() = _binding!!
 
   private val viewModel: PopularMoviesViewModel by inject()
+  private val animationViewModel: AnimationViewModel by sharedViewModel()
   private val popularAdapter: MoviesAdapter by inject()
 
   override fun onCreateView(
@@ -85,7 +91,15 @@ class PopularMoviesFragment : Fragment(R.layout.fragment_popular) {
     viewModel.movies.observe(viewLifecycleOwner, { movies ->
       popularAdapter.submitList(movies)
     })
-
+    animationViewModel.animateEntranceLiveData.observe(viewLifecycleOwner, { shouldAnimate ->
+      if (binding.root.visibility == View.INVISIBLE) {
+        if (shouldAnimate) {
+          animateContentIn()
+        } else {
+          binding.root.visibility = View.VISIBLE
+        }
+      }
+    })
     viewModel.events.observe(viewLifecycleOwner, { event ->
       when (event) {
         is Loading -> {
@@ -99,6 +113,10 @@ class PopularMoviesFragment : Fragment(R.layout.fragment_popular) {
         }
       }
     })
+  }
+
+  private fun animateContentIn() {
+    // TODO: Animate content in!
   }
 
   override fun onDestroyView() {
