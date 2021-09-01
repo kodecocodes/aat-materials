@@ -36,10 +36,12 @@ package com.raywenderlich.cinematic.favorites
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewAnimationUtils
 import android.view.ViewGroup
+import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.raywenderlich.cinematic.AnimationViewModel
 import com.raywenderlich.cinematic.MoviesAdapter
 import com.raywenderlich.cinematic.R
 import com.raywenderlich.cinematic.databinding.FragmentFavoritesBinding
@@ -47,12 +49,15 @@ import com.raywenderlich.cinematic.model.Movie
 import com.raywenderlich.cinematic.util.Events
 import com.raywenderlich.cinematic.util.MovieListClickListener
 import org.koin.android.ext.android.inject
+import org.koin.android.viewmodel.ext.android.sharedViewModel
+import kotlin.math.hypot
 
 class FavoriteMoviesFragment : Fragment(R.layout.fragment_favorites) {
   private var _binding: FragmentFavoritesBinding? = null
   private val binding get() = _binding!!
 
   private val viewModel: FavouriteMoviesViewModel by inject()
+  private val animationViewModel: AnimationViewModel by sharedViewModel()
   private val favouritesAdapter: MoviesAdapter by inject()
 
   override fun onCreateView(
@@ -80,11 +85,32 @@ class FavoriteMoviesFragment : Fragment(R.layout.fragment_favorites) {
     attachObservers()
   }
 
+  private fun animateContentIn() {
+    binding.root.doOnPreDraw {
+      val view = binding.root
+      val cx = view.width
+      val cy = view.height
+      val finalRadius = hypot(view.width.toDouble(), view.height.toDouble())
+      val anim = ViewAnimationUtils.createCircularReveal(view, cx, cy, 0f, finalRadius.toFloat())
+      view.visibility = View.VISIBLE
+      anim.duration = 600
+      anim.start()
+    }
+  }
+
   private fun attachObservers() {
     viewModel.movies.observe(viewLifecycleOwner, { movies ->
       favouritesAdapter.submitList(movies)
     })
-
+    animationViewModel.animateEntranceLiveData.observe(viewLifecycleOwner, { shouldAnimate ->
+      if (binding.root.visibility == View.INVISIBLE) {
+        if (shouldAnimate) {
+          animateContentIn()
+        } else {
+          binding.root.visibility = View.VISIBLE
+        }
+      }
+    })
     viewModel.events.observe(viewLifecycleOwner, { event ->
       when (event) {
         is Events.Loading -> {
