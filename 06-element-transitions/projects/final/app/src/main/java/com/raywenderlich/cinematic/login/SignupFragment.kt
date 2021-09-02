@@ -62,15 +62,12 @@ class SignupFragment : Fragment() {
     val set = TransitionSet()
 
     val changeBounds = ChangeBounds()
-    changeBounds.addTarget(R.id.logo)
     set.addTransition(changeBounds)
 
     val changeTransform = ChangeTransform()
-    changeTransform.addTarget(R.id.logo)
     set.addTransition(changeTransform)
 
     val textSize = TextSizeTransition()
-    textSize.addTarget(R.id.logo)
     set.addTransition(textSize)
 
     sharedElementEnterTransition = set

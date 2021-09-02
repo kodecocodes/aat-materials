@@ -69,7 +69,7 @@ class AuthActivity : AppCompatActivity() {
   private fun showLogin(sharedView: View) {
     supportFragmentManager.commit {
       replace(R.id.fragmentContainer, LoginFragment.newInstance())
-      addSharedElement(sharedView, "logo_transition_name")
+      addSharedElement(sharedView, sharedView.transitionName)
       addToBackStack(null)
     }
   }
@@ -77,7 +77,7 @@ class AuthActivity : AppCompatActivity() {
   private fun showSignup(sharedView: View) {
     supportFragmentManager.commit {
       replace(R.id.fragmentContainer, SignupFragment.newInstance())
-      addSharedElement(sharedView, "logo_transition_name")
+      addSharedElement(sharedView, sharedView.transitionName)
       addToBackStack(null)
     }
   }
