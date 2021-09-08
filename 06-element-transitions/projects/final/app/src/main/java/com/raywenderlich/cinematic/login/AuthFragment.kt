@@ -69,10 +69,10 @@ class AuthFragment : Fragment() {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     binding.signIn.setOnClickListener {
-      viewModel.onSignInPressed(binding.logo)
+      viewModel.onSignInPressed()
     }
     binding.newSignUp.setOnClickListener {
-      viewModel.onNewUserPressed(binding.logo)
+      viewModel.onNewUserPressed()
     }
   }
 

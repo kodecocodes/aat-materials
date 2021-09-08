@@ -59,23 +59,25 @@ class AuthActivity : AppCompatActivity() {
       overridePendingTransition(R.anim.auth_main_enter, R.anim.auth_main_exit)
     }
     viewModel.showLogin.observe(this) {
-      showLogin(it)
+      showLogin()
     }
     viewModel.showSignUp.observe(this) {
-      showSignup(it)
+      showSignup()
     }
   }
 
-  private fun showLogin(sharedView: View) {
+  private fun showLogin() {
     supportFragmentManager.commit {
       replace(R.id.fragmentContainer, LoginFragment.newInstance())
+      val sharedView = findViewById<View>(R.id.logo)
       addSharedElement(sharedView, sharedView.transitionName)
       addToBackStack(null)
     }
   }
 
-  private fun showSignup(sharedView: View) {
+  private fun showSignup() {
     supportFragmentManager.commit {
+      val sharedView = findViewById<View>(R.id.logo)
       replace(R.id.fragmentContainer, SignupFragment.newInstance())
       addSharedElement(sharedView, sharedView.transitionName)
       addToBackStack(null)
