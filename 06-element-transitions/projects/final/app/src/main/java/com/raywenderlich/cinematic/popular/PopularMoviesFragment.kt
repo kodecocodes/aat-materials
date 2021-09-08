@@ -49,7 +49,6 @@ import org.koin.android.ext.android.inject
 import android.view.ViewAnimationUtils
 
 import androidx.core.view.doOnPreDraw
-import androidx.lifecycle.distinctUntilChanged
 import com.raywenderlich.cinematic.AnimationViewModel
 import com.raywenderlich.cinematic.R
 import org.koin.android.viewmodel.ext.android.sharedViewModel
@@ -61,7 +60,6 @@ class PopularMoviesFragment : Fragment(R.layout.fragment_popular) {
 
   private val viewModel: PopularMoviesViewModel by inject()
   private val animationViewModel: AnimationViewModel by sharedViewModel()
-  private var hasAnimatedIn = false
   private val popularAdapter: MoviesAdapter by inject()
 
   override fun onCreateView(
@@ -99,15 +97,14 @@ class PopularMoviesFragment : Fragment(R.layout.fragment_popular) {
       anim.duration = 600
       anim.start()
     }
-    hasAnimatedIn = true
   }
 
   private fun attachObservers() {
     viewModel.movies.observe(viewLifecycleOwner, { movies ->
       popularAdapter.submitList(movies)
     })
-    animationViewModel.animateEntranceLiveData.observe(viewLifecycleOwner, { shouldAnimate ->
-      if (shouldAnimate && !hasAnimatedIn) {
+    animationViewModel.animatePopularEntranceLiveData.observe(viewLifecycleOwner, { shouldAnimate ->
+      if (shouldAnimate) {
         animateContentIn()
       }
     })

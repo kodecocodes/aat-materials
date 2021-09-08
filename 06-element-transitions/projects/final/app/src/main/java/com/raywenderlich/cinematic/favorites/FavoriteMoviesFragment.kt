@@ -40,7 +40,6 @@ import android.view.ViewAnimationUtils
 import android.view.ViewGroup
 import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.distinctUntilChanged
 import androidx.navigation.fragment.findNavController
 import com.raywenderlich.cinematic.AnimationViewModel
 import com.raywenderlich.cinematic.MoviesAdapter
@@ -58,7 +57,6 @@ class FavoriteMoviesFragment : Fragment(R.layout.fragment_favorites) {
   private val binding get() = _binding!!
   private val viewModel: FavouriteMoviesViewModel by inject()
   private val animationViewModel: AnimationViewModel by sharedViewModel()
-  private var hasAnimatedIn = false
   private val favouritesAdapter: MoviesAdapter by inject()
 
   override fun onCreateView(
@@ -96,15 +94,14 @@ class FavoriteMoviesFragment : Fragment(R.layout.fragment_favorites) {
       anim.duration = 600
       anim.start()
     }
-    hasAnimatedIn = true
   }
 
   private fun attachObservers() {
     viewModel.movies.observe(viewLifecycleOwner, { movies ->
       favouritesAdapter.submitList(movies)
     })
-    animationViewModel.animateEntranceLiveData.observe(viewLifecycleOwner, { shouldAnimate ->
-        if (shouldAnimate && !hasAnimatedIn) {
+    animationViewModel.animateFavoriteEntranceLiveData.observe(viewLifecycleOwner, { shouldAnimate ->
+        if (shouldAnimate) {
           animateContentIn()
         }
       })

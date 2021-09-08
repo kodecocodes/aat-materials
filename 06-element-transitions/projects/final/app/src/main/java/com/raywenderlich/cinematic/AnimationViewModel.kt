@@ -4,5 +4,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class AnimationViewModel : ViewModel() {
-  val animateEntranceLiveData = MutableLiveData(false)
+  val animateFavoriteEntranceLiveData = MutableLiveData(false)
+  val animatePopularEntranceLiveData = MutableLiveData(false)
 }
