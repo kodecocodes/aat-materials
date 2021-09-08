@@ -34,21 +34,11 @@
 package com.raywenderlich.cinematic
 
 import android.animation.Animator
-import android.animation.ObjectAnimator
-import android.content.Context
-import android.util.AttributeSet
-import android.util.Property
-import android.util.TypedValue
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.transition.Transition
 import androidx.transition.TransitionValues
 
-class TextSizeTransition : Transition {
-  constructor()
-  constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs)
-
-  override fun getTransitionProperties() = null
+class TextSizeTransition : Transition() {
 
   override fun captureStartValues(transitionValues: TransitionValues) {
   }
@@ -66,13 +56,5 @@ class TextSizeTransition : Transition {
 
   companion object {
     private const val textSizeProp = "transition:textsize"
-    private val properties = arrayOf(textSizeProp)
-    private val textSizeProperty = TextSizeProperty()
-  }
-
-  class TextSizeProperty : Property<TextView, Float>(Float::class.java, "textSize") {
-    override fun get(textView: TextView): Float = textView.textSize
-    override fun set(textView: TextView, textSizePixels: Float) =
-      textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSizePixels)
   }
 }

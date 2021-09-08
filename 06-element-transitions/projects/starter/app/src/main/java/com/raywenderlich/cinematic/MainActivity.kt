@@ -65,15 +65,14 @@ class MainActivity : AppCompatActivity() {
         else -> binding.bottomNav.visibility = View.VISIBLE
       }
 
-      val shouldTriggerAnimation = (
-          lastBackstackEntry == R.id.popularMoviesFragment &&
-              destination.id == R.id.favoriteMoviesFragment
-          ) || (
-          lastBackstackEntry == R.id.favoriteMoviesFragment &&
-              destination.id == R.id.popularMoviesFragment
-          )
+      val shouldTriggerFavoriteAnimation = lastBackstackEntry == R.id.popularMoviesFragment &&
+          destination.id == R.id.favoriteMoviesFragment
+      val shouldTriggerPopularAnimation = lastBackstackEntry == R.id.favoriteMoviesFragment &&
+          destination.id == R.id.popularMoviesFragment
 
-      viewModel.animateEntranceLiveData.value = shouldTriggerAnimation
+      viewModel.animateFavoriteEntranceLiveData.value = shouldTriggerFavoriteAnimation
+      viewModel.animatePopularEntranceLiveData.value = shouldTriggerPopularAnimation
+      
       lastBackstackEntry = destination.id
     }
   }
