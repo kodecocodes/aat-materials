@@ -87,10 +87,10 @@ class FavoriteMoviesFragment : Fragment(R.layout.fragment_favorites) {
   private fun animateContentIn() {
     binding.root.doOnPreDraw {
       val view = binding.root
-      val cx = view.width
-      val cy = view.height
+      val centerX = view.width
+      val centerY = view.height
       val finalRadius = hypot(view.width.toDouble(), view.height.toDouble())
-      val anim = ViewAnimationUtils.createCircularReveal(view, cx, cy, 0f, finalRadius.toFloat())
+      val anim = ViewAnimationUtils.createCircularReveal(view, centerX, centerY, 0f, finalRadius.toFloat())
       anim.duration = 600
       anim.start()
     }
