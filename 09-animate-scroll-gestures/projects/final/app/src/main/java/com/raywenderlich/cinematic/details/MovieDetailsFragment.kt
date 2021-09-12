@@ -94,6 +94,9 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_details) {
 
       binding.posterContainer.scaleX = scale
       binding.posterContainer.scaleY = scale
+
+      binding.toolbar.alpha = scrollPercent
+      binding.ratingContainer.alpha = scrollPercent
     })
   }
 
@@ -117,7 +120,6 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_details) {
       crossfade(true)
     }
 
-    binding.title.text = movie.title
     binding.summary.text = movie.overview
     binding.ratingValue.text = movie.rating.toString()
     binding.movieRating.rating = movie.rating

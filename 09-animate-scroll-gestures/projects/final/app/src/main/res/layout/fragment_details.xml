@@ -34,6 +34,48 @@
         android:layout_height="?attr/actionBarSize"
         app:layout_collapseMode="pin" />
 
+      <RelativeLayout
+        android:id="@+id/ratingContainer"
+        android:layout_width="match_parent"
+        android:alpha="0"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_gravity="bottom|end|center_vertical"
+        app:layout_collapseMode="pin"
+        app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
+
+        <RatingBar
+          android:id="@+id/movieRating"
+          style="@style/Widget.AppCompat.RatingBar.Small"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_centerVertical="true"
+          android:layout_margin="16dp"
+          android:layout_toStartOf="@id/ratingValue"
+          android:elevation="4dp"
+          android:isIndicator="true"
+          android:numStars="5"
+          android:progressTint="@color/colorRating"
+          android:rating="3.5"
+          android:scaleX="1.5"
+          android:scaleY="1.5" />
+
+        <TextView
+          android:id="@+id/ratingValue"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignParentEnd="true"
+          android:layout_centerVertical="true"
+          android:layout_marginStart="16dp"
+          android:layout_marginEnd="16dp"
+          android:elevation="4dp"
+          android:fontFamily="@font/rubik_one"
+          android:letterSpacing="-0.1"
+          android:textColor="?colorOnPrimary"
+          android:textSize="32sp"
+          android:textStyle="bold"
+          tools:text="4.2" />
+      </RelativeLayout>
+
     </com.google.android.material.appbar.CollapsingToolbarLayout>
 
   </com.google.android.material.appbar.AppBarLayout>
@@ -49,58 +91,6 @@
       android:layout_height="wrap_content"
       android:clipChildren="false">
 
-      <RatingBar
-        android:id="@+id/movieRating"
-        style="@style/Widget.AppCompat.RatingBar.Small"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:elevation="4dp"
-        android:isIndicator="true"
-        android:numStars="5"
-        android:progressTint="@color/colorRating"
-        android:rating="3.5"
-        android:scaleX="1.5"
-        android:scaleY="1.5"
-        app:layout_constraintBottom_toBottomOf="@id/ratingValue"
-        app:layout_constraintEnd_toEndOf="@id/title"
-        app:layout_constraintStart_toEndOf="@id/ratingValue"
-        app:layout_constraintTop_toTopOf="@id/ratingValue" />
-
-      <TextView
-        android:id="@+id/title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="64dp"
-        android:elevation="4dp"
-        android:ellipsize="end"
-        android:fontFamily="@font/chivo_bold"
-        android:maxLines="1"
-        android:textAlignment="center"
-        android:textColor="?colorOnPrimary"
-        android:textSize="22sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/posterContainer"
-        tools:text="Spiderman Far From Home" />
-
-      <TextView
-        android:id="@+id/ratingValue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:elevation="4dp"
-        android:fontFamily="@font/rubik_one"
-        android:letterSpacing="-0.1"
-        android:textColor="?colorOnPrimary"
-        android:textSize="36sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@id/posterContainer"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/title"
-        tools:text="4.2" />
-
       <TextView
         android:id="@+id/overviewHeader"
         android:layout_width="wrap_content"
@@ -112,7 +102,7 @@
         android:text="@string/header_overview"
         android:textColor="?colorOnPrimary"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/movieRating" />
+        app:layout_constraintTop_toBottomOf="@id/posterContainer" />
 
       <TextView
         android:id="@+id/summary"
