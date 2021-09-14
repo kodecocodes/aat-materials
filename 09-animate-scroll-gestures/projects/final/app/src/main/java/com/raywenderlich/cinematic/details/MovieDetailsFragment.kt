@@ -38,6 +38,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
+import androidx.core.view.doOnLayout
+import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -60,6 +62,9 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_details) {
   private val viewModel: MovieDetailsViewModel by viewModel()
 
   private val castAdapter: CastAdapter by inject()
+
+  private var originalWidth: Int = 0
+  private var originalHeight: Int = 0
 
   override fun onCreateView(
     inflater: LayoutInflater,
@@ -84,6 +89,11 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_details) {
     }
     attachObservers()
     setupScrolling()
+
+    binding.posterContainer.doOnLayout {
+      originalWidth = it.width
+      originalHeight = it.height
+    }
   }
 
   private fun setupScrolling() {
@@ -92,10 +102,11 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_details) {
       val scrollPercent = abs(verticalOffset / scrollRange)
       val scale = (1 + scrollPercent)
 
-      binding.posterContainer.scaleX = scale
-      binding.posterContainer.scaleY = scale
+      binding.posterContainer.updateLayoutParams {
+        this.width = (scale * originalWidth).toInt()
+        this.height = (scale * originalHeight).toInt()
+      }
 
-      binding.toolbar.alpha = scrollPercent
       binding.ratingContainer.alpha = scrollPercent
     })
   }

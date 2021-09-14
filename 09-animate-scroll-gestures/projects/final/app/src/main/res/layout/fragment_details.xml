@@ -147,7 +147,7 @@
         android:id="@+id/posterContainer"
         android:layout_width="150dp"
         android:layout_height="210dp"
-        android:layout_marginTop="142dp"
+        android:layout_marginTop="32dp"
         android:elevation="24dp"
         app:cardCornerRadius="4dp"
         app:cardElevation="4dp"
