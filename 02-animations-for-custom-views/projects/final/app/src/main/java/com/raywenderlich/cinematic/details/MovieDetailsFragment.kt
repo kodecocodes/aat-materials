@@ -37,7 +37,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
@@ -99,7 +98,7 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_details) {
     viewModel.events.observe(viewLifecycleOwner, { event ->
       when (event) {
         is Events.Loading -> {
-          binding.addToFavourites.showProgress()
+          binding.addToFavorites.showProgress()
         }
       }
     })
@@ -114,13 +113,13 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_details) {
     binding.ratingValue.text = movie.rating.toString()
     binding.movieRating.rating = movie.rating
 
-    binding.addToFavourites.setFavourite(movie.isFavourite)
+    binding.addToFavorites.setFavorite(movie.isFavorite)
 
-    binding.addToFavourites.setOnFavouriteClickListener {
-      if (movie.isFavourite) {
-        viewModel.unsetMovieAsFavourite(movie.id)
+    binding.addToFavorites.setOnFavoriteClickListener {
+      if (movie.isFavorite) {
+        viewModel.unsetMovieAsFavorite(movie.id)
       } else {
-        viewModel.setMovieAsFavourite(movie.id)
+        viewModel.setMovieAsFavorite(movie.id)
       }
     }
   }

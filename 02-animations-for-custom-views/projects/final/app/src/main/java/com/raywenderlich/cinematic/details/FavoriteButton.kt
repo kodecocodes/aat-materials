@@ -13,17 +13,17 @@ import androidx.core.animation.doOnEnd
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import com.raywenderlich.cinematic.R
-import com.raywenderlich.cinematic.databinding.ViewFavouriteButtonBinding
+import com.raywenderlich.cinematic.databinding.ViewFavoriteButtonBinding
 import com.raywenderlich.cinematic.util.DisplayMetricsUtil
 
-class FavouriteButton @JvmOverloads constructor(
+class FavoriteButton @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyle: Int = 0
 ) : ConstraintLayout(context, attrs, defStyle) {
 
-    private val binding: ViewFavouriteButtonBinding =
-        ViewFavouriteButtonBinding.inflate(LayoutInflater.from(context), this)
+    private val binding: ViewFavoriteButtonBinding =
+        ViewFavoriteButtonBinding.inflate(LayoutInflater.from(context), this)
 
     private val animators = mutableListOf<ValueAnimator>()
 
@@ -37,15 +37,15 @@ class FavouriteButton @JvmOverloads constructor(
         setPadding(padding, 0, padding, padding)
     }
 
-    fun setOnFavouriteClickListener(listener: () -> Unit) {
-        binding.favouriteButton.setOnClickListener {
+    fun setOnFavoriteClickListener(listener: () -> Unit) {
+        binding.favoriteButton.setOnClickListener {
             listener.invoke()
         }
     }
 
-    fun setFavourite(isFavourite: Boolean) {
-        binding.favouriteButton.apply {
-            icon = if (isFavourite) {
+    fun setFavorite(isFavorite: Boolean) {
+        binding.favoriteButton.apply {
+            icon = if (isFavorite) {
                 AppCompatResources.getDrawable(context, R.drawable.ic_baseline_favorite_24)
             } else {
                 AppCompatResources.getDrawable(
@@ -53,10 +53,10 @@ class FavouriteButton @JvmOverloads constructor(
                     R.drawable.ic_baseline_favorite_border_24
                 )
             }
-            text = if (isFavourite) {
-                context.getString(R.string.remove_from_favourites)
+            text = if (isFavorite) {
+                context.getString(R.string.remove_from_favorites)
             } else {
-                context.getString(R.string.add_to_favourites)
+                context.getString(R.string.add_to_favorites)
             }
         }
         hideProgress()
@@ -64,7 +64,7 @@ class FavouriteButton @JvmOverloads constructor(
 
     fun showProgress() {
         binding.progressBar.isVisible = true
-        binding.favouriteButton.apply {
+        binding.favoriteButton.apply {
             icon = null
             text = null
 
@@ -77,10 +77,10 @@ class FavouriteButton @JvmOverloads constructor(
 
     private fun animateButton() {
 
-        val initialWidth = binding.favouriteButton.measuredWidth
-        val finalWidth = binding.favouriteButton.measuredHeight
+        val initialWidth = binding.favoriteButton.measuredWidth
+        val finalWidth = binding.favoriteButton.measuredHeight
 
-        val initialTextSize = binding.favouriteButton.textSize
+        val initialTextSize = binding.favoriteButton.textSize
 
         val widthAnimator = ValueAnimator.ofInt(initialWidth, finalWidth)
         val textSizeAnimator = ValueAnimator.ofFloat(initialTextSize, 0f)
@@ -94,13 +94,13 @@ class FavouriteButton @JvmOverloads constructor(
         alphaAnimator.duration = 1000
 
         widthAnimator.addUpdateListener {
-            binding.favouriteButton.updateLayoutParams {
+            binding.favoriteButton.updateLayoutParams {
                 this.width = it.animatedValue as Int
             }
         }
 
         textSizeAnimator.addUpdateListener {
-            binding.favouriteButton.textSize =
+            binding.favoriteButton.textSize =
                 (it.animatedValue as Float) / resources.displayMetrics.density
         }
 
@@ -128,7 +128,7 @@ class FavouriteButton @JvmOverloads constructor(
 
     private fun hideProgress() {
         binding.progressBar.isVisible = false
-        binding.favouriteButton.apply {
+        binding.favoriteButton.apply {
             extend()
             isClickable = true
             isFocusable = true

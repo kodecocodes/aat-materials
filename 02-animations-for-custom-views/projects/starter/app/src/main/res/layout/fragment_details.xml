@@ -144,8 +144,8 @@
         android:scaleType="fitXY" />
     </com.google.android.material.card.MaterialCardView>
 
-    <com.raywenderlich.cinematic.details.FavouriteButton
-        android:id="@+id/addToFavourites"
+    <com.raywenderlich.cinematic.details.FavoriteButton
+        android:id="@+id/addToFavorites"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"

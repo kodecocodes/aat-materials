@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/favouriteButton"
+        android:id="@+id/favorite_button"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_margin="24dp"
         android:fontFamily="@font/rubik_regular"
         android:letterSpacing="0"
-        android:text="@string/add_to_favourites"
+        android:text="@string/add_to_favorites"
         android:textAllCaps="false"
         android:textAlignment="center"
         android:paddingStart="24dp"

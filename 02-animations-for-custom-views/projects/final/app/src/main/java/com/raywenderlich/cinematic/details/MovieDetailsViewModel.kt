@@ -78,17 +78,17 @@ class MovieDetailsViewModel constructor(private val repository: MoviesRepository
     }
   }
 
-  fun setMovieAsFavourite(id: Int) {
+  fun setMovieAsFavorite(id: Int) {
     _events.value = Events.Loading
     viewModelScope.launch(Dispatchers.IO) {
-      repository.setFavourite(id)
+      repository.setFavorite(id)
     }
   }
 
-  fun unsetMovieAsFavourite(id: Int) {
+  fun unsetMovieAsFavorite(id: Int) {
     _events.value = Events.Loading
     viewModelScope.launch(Dispatchers.IO) {
-      repository.removeFavourite(id)
+      repository.removeFavorite(id)
     }
   }
 }
