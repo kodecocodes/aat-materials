@@ -12,9 +12,11 @@
     tools:layout="@layout/fragment_popular">
     <action
       android:id="@+id/action_popularMoviesFragment_to_movieDetailsFragment"
-      app:destination="@id/movieDetailsFragment"
       app:enterAnim="@anim/nav_graph_enter"
-      app:exitAnim="@anim/nav_graph_exit" />
+      app:exitAnim="@anim/nav_graph_exit"
+      app:popEnterAnim="@anim/nav_graph_pop_enter"
+      app:popExitAnim="@anim/nav_graph_pop_exit"
+      app:destination="@id/movieDetailsFragment" />
   </fragment>
 
   <fragment
