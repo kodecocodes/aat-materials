@@ -100,11 +100,11 @@ class FavoriteMoviesFragment : Fragment(R.layout.fragment_favorites) {
     viewModel.movies.observe(viewLifecycleOwner, { movies ->
       favouritesAdapter.submitList(movies)
     })
-    animationViewModel.animateFavoriteEntranceLiveData.observe(viewLifecycleOwner, { shouldAnimate ->
-        if (shouldAnimate) {
-          animateContentIn()
-        }
-      })
+    animationViewModel.animateFavoriteEntranceLiveData.observe(viewLifecycleOwner) { shouldAnimate ->
+      if (shouldAnimate) {
+        animateContentIn()
+      }
+    }
     viewModel.events.observe(viewLifecycleOwner, { event ->
       when (event) {
         is Events.Loading -> {

@@ -103,11 +103,11 @@ class PopularMoviesFragment : Fragment(R.layout.fragment_popular) {
     viewModel.movies.observe(viewLifecycleOwner, { movies ->
       popularAdapter.submitList(movies)
     })
-    animationViewModel.animatePopularEntranceLiveData.observe(viewLifecycleOwner, { shouldAnimate ->
+    animationViewModel.animatePopularEntranceLiveData.observe(viewLifecycleOwner) { shouldAnimate ->
       if (shouldAnimate) {
         animateContentIn()
       }
-    })
+    }
     viewModel.events.observe(viewLifecycleOwner, { event ->
       when (event) {
         is Loading -> {
