@@ -86,7 +86,7 @@ data class Movie(
     @SerializedName("vote_count")
     val voteCount: Int = 0,
 
-    val isFavourite: Boolean = false,
+    val isFavorite: Boolean = false,
 ) : Parcelable {
 
   val rating: Float

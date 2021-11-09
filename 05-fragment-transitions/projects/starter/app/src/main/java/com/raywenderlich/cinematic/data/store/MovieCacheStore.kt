@@ -53,8 +53,8 @@ class MovieCacheStore constructor(
     moviesDao.deleteAllMovies()
   }
 
-  override suspend fun getFavouriteMovies(): Flow<List<Movie>> {
-    return moviesDao.getFavouriteMovies()
+  override suspend fun getFavoriteMovies(): Flow<List<Movie>> {
+    return moviesDao.getFavoriteMovies()
   }
 
   override suspend fun getMovie(id: Int): Flow<Movie> {
@@ -65,12 +65,12 @@ class MovieCacheStore constructor(
     return moviesDao.getPopularMovies()
   }
 
-  override suspend fun setFavourite(id: Int) {
-    moviesDao.setFavourite(id)
+  override suspend fun setFavorite(id: Int) {
+    moviesDao.setFavorite(id)
   }
 
-  override suspend fun removeFavourite(id: Int) {
-    moviesDao.removeFavourite(id)
+  override suspend fun removeFavorite(id: Int) {
+    moviesDao.removeFavorite(id)
   }
 
   override suspend fun getCastDetails(id: Int): List<Cast> {

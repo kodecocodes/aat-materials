@@ -51,20 +51,20 @@ class MoviesDataRepository(
     cacheStore.deleteAllMovies()
   }
 
-  override suspend fun getFavouriteMovies(): Flow<List<Movie>> {
-    return cacheStore.getFavouriteMovies()
+  override suspend fun getFavoriteMovies(): Flow<List<Movie>> {
+    return cacheStore.getFavoriteMovies()
   }
 
   override suspend fun getPopularMovies(): Flow<List<Movie>> {
     return cacheStore.getPopularMovies()
   }
 
-  override suspend fun setFavourite(id: Int) {
-    cacheStore.setFavourite(id)
+  override suspend fun setFavorite(id: Int) {
+    cacheStore.setFavorite(id)
   }
 
-  override suspend fun removeFavourite(id: Int) {
-    cacheStore.removeFavourite(id)
+  override suspend fun removeFavorite(id: Int) {
+    cacheStore.removeFavorite(id)
   }
 
   override suspend fun getMovie(id: Int): Flow<Movie> {
