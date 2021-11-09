@@ -46,8 +46,8 @@ abstract class MoviesDao {
   @Query("SELECT * FROM movie")
   abstract fun getPopularMovies(): Flow<List<Movie>>
 
-  @Query("SELECT * FROM movie WHERE isFavourite = 1")
-  abstract fun getFavouriteMovies(): Flow<List<Movie>>
+  @Query("SELECT * FROM movie WHERE isFavorite = 1")
+  abstract fun getFavoriteMovies(): Flow<List<Movie>>
 
   @Query("SELECT * FROM movie WHERE id =:id LIMIT 1")
   abstract fun getMovie(id: Int): Flow<Movie>
@@ -58,10 +58,10 @@ abstract class MoviesDao {
   @Query("DELETE FROM movie")
   abstract suspend fun deleteAllMovies()
 
-  @Query("UPDATE movie SET isFavourite = 1 WHERE id=:id")
-  abstract suspend fun setFavourite(id: Int)
+  @Query("UPDATE movie SET isFavorite = 1 WHERE id=:id")
+  abstract suspend fun setFavorite(id: Int)
 
-  @Query("UPDATE movie SET isFavourite = 0 WHERE id=:id")
-  abstract suspend fun removeFavourite(id: Int)
+  @Query("UPDATE movie SET isFavorite = 0 WHERE id=:id")
+  abstract suspend fun removeFavorite(id: Int)
 
 }
