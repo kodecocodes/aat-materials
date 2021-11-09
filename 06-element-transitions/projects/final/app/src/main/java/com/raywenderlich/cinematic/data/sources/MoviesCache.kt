@@ -44,15 +44,15 @@ interface MoviesCache {
 
   suspend fun deleteAllMovies()
 
-  suspend fun getFavouriteMovies(): Flow<List<Movie>>
+  suspend fun getFavoriteMovies(): Flow<List<Movie>>
 
   suspend fun getMovie(id: Int): Flow<Movie>
 
   suspend fun getPopularMovies(): Flow<List<Movie>>
 
-  suspend fun setFavourite(id: Int)
+  suspend fun setFavorite(id: Int)
 
-  suspend fun removeFavourite(id: Int)
+  suspend fun removeFavorite(id: Int)
 
   suspend fun getCastDetails(id: Int): List<Cast>
 
