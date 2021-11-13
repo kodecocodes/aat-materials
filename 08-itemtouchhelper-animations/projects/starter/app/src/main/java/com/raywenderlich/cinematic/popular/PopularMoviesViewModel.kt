@@ -47,23 +47,23 @@ import kotlinx.coroutines.launch
 class PopularMoviesViewModel constructor(private val repository: MoviesRepository) :
     BaseViewModel() {
 
-  private val _movies = MutableLiveData<List<Movie>>()
-  val movies = _movies as LiveData<List<Movie>>
+    private val _movies = MutableLiveData<List<Movie>>()
+    val movies = _movies as LiveData<List<Movie>>
 
-  fun getPopularMovies() {
-    _events.value = Events.Loading
+    fun getPopularMovies() {
+        _events.value = Events.Loading
 
-    viewModelScope.launch {
-      repository.getPopularMovies().collect { result ->
-        _events.value = Events.Done
-        _movies.value = result
-      }
+        viewModelScope.launch {
+            repository.getPopularMovies().collect { result ->
+                _events.value = Events.Done
+                _movies.value = result
+            }
+        }
     }
-  }
 
-  fun setMovieAsFavourite(id: Int) {
-    viewModelScope.launch(Dispatchers.IO) {
-      repository.setFavourite(id)
+    fun setMovieAsFavorite(id: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.setFavorite(id)
+        }
     }
-  }
 }
