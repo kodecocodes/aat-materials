@@ -34,9 +34,9 @@ class MyItemTouchHelperCallback(
 
       lifecycleOwner.lifecycleScope.launch {
         if (direction == ItemTouchHelper.RIGHT) {
-          moviesRepository.setFavourite(movieId)
+          moviesRepository.setFavorite(movieId)
         } else if (direction == ItemTouchHelper.LEFT) {
-          moviesRepository.removeFavourite(movieId)
+          moviesRepository.removeFavorite(movieId)
         }
       }
     }
