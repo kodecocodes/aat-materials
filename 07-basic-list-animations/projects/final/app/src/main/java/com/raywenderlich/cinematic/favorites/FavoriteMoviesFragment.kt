@@ -38,7 +38,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.raywenderlich.cinematic.MoviesAdapter
 import com.raywenderlich.cinematic.R
@@ -52,7 +51,7 @@ class FavoriteMoviesFragment : Fragment(R.layout.fragment_favorites) {
   private var _binding: FragmentFavoritesBinding? = null
   private val binding get() = _binding!!
 
-  private val viewModel: FavouriteMoviesViewModel by inject()
+  private val viewModel: FavoriteMoviesViewModel by inject()
   private val favouritesAdapter: MoviesAdapter by inject()
 
   override fun onCreateView(
