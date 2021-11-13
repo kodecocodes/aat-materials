@@ -50,10 +50,10 @@ class FavoriteMoviesViewModel constructor(private val repository: MoviesReposito
   private val _movies = MutableLiveData<List<Movie>>()
   val movies = _movies as LiveData<List<Movie>>
 
-  fun getFavouriteMovies() {
+  fun getFavoriteMovies() {
     _events.value = Events.Loading
     viewModelScope.launch(Dispatchers.IO) {
-      repository.getFavouriteMovies().collect { result ->
+      repository.getFavoriteMovies().collect { result ->
         withContext(Dispatchers.Main) {
           _movies.value = result
           _events.value = Events.Done

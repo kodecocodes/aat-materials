@@ -63,7 +63,7 @@ class PopularMoviesViewModel constructor(private val repository: MoviesRepositor
 
   fun setMovieAsFavourite(id: Int) {
     viewModelScope.launch(Dispatchers.IO) {
-      repository.setFavourite(id)
+      repository.setFavorite(id)
     }
   }
 }

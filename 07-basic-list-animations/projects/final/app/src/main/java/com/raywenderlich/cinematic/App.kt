@@ -58,7 +58,7 @@ class App : Application(), KoinComponent {
     super.onCreate()
 
     startKoin {
-      androidLogger(Level.DEBUG)
+      androidLogger(Level.ERROR)
       androidContext(this@App)
       modules(dataModule + appModule)
     }
