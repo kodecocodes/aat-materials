@@ -135,22 +135,22 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_details) {
     binding.ratingValue.text = movie.rating.toString()
     binding.movieRating.rating = movie.rating
 
-    binding.addToFavourites.apply {
-      icon = if (movie.isFavourite) {
+    binding.addToFavorites.apply {
+      icon = if (movie.isFavorite) {
         getDrawable(requireContext(), R.drawable.ic_baseline_favorite_24)
       } else {
         getDrawable(requireContext(), R.drawable.ic_baseline_favorite_border_24)
       }
-      text = if (movie.isFavourite) {
+      text = if (movie.isFavorite) {
         getString(R.string.remove_from_favourites)
       } else {
         getString(R.string.add_to_favourites)
       }
       setOnClickListener {
-        if (movie.isFavourite) {
-          viewModel.unsetMovieAsFavourite(movie.id)
+        if (movie.isFavorite) {
+          viewModel.unsetMovieAsFavorite(movie.id)
         } else {
-          viewModel.setMovieAsFavourite(movie.id)
+          viewModel.setMovieAsFavorite(movie.id)
         }
       }
     }

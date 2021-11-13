@@ -45,7 +45,7 @@ android {
 dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     def koin_version = '2.2.2'
-    def room_version = "2.2.6"
+    def room_version = "2.3.0"
     def nav_version = "2.3.4"
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
@@ -73,14 +73,11 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.2"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3"
 
-    implementation "org.koin:koin-core:$koin_version"
-    implementation "org.koin:koin-android:$koin_version"
-    implementation "org.koin:koin-android-scope:$koin_version"
-    implementation "org.koin:koin-android-viewmodel:$koin_version"
+    implementation "io.insert-koin:koin-core:$koin_version"
+    implementation "io.insert-koin:koin-android:$koin_version"
+    implementation "io.insert-koin:koin-android-scope:$koin_version"
+    implementation "io.insert-koin:koin-android-viewmodel:$koin_version"
 
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
-    testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 }
