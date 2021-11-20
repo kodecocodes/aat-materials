@@ -20,7 +20,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.google.accompanist.coil.rememberCoilPainter
+import coil.compose.rememberImagePainter
 import com.hackertronix.cinematic.util.FakeDataFactory.makeMovie
 import com.raywenderlich.cinematic.model.Movie
 import com.raywenderlich.cinematic.util.Constants
@@ -40,9 +40,9 @@ fun MovieCard(movie: Movie, onMovieClicked: (Movie) -> Unit) {
   ) {
     Box(contentAlignment = Alignment.BottomCenter) {
       Image(
-        painter = rememberCoilPainter(
-          request = Constants.IMAGE_BASE + movie.backdropPath,
-          requestBuilder = {
+        painter = rememberImagePainter(
+          data = Constants.IMAGE_BASE + movie.backdropPath,
+          builder = {
             crossfade(true)
           }
         ),
@@ -99,12 +99,12 @@ fun MovieCard(movie: Movie, onMovieClicked: (Movie) -> Unit) {
 
 @Preview(uiMode = UI_MODE_NIGHT_NO)
 @Composable
-fun previewMovieCard() {
+fun PreviewMovieCard() {
   MovieCard(movie = makeMovie(), onMovieClicked = {})
 }
 
 @Preview(uiMode = UI_MODE_NIGHT_YES)
 @Composable
-fun previewMovieCardDark() {
+fun PreviewMovieCardDark() {
   MovieCard(movie = makeMovie(), onMovieClicked = {})
 }

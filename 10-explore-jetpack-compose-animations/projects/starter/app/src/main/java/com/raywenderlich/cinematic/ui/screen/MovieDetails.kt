@@ -51,8 +51,8 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import coil.compose.rememberImagePainter
 import coil.transform.BlurTransformation
-import com.google.accompanist.coil.rememberCoilPainter
 import com.raywenderlich.cinematic.details.MovieDetailsViewModel
 import com.raywenderlich.cinematic.model.Cast
 import com.raywenderlich.cinematic.model.Movie
@@ -107,12 +107,12 @@ fun MovieDetailsContent(
 @Composable
 fun DetailsHeaderBackdrop(movie: Movie, context: Context) {
   Image(
-    painter = rememberCoilPainter(
-      request = Constants.IMAGE_BASE + movie.backdropPath,
-      requestBuilder = {
+    painter = rememberImagePainter(
+      data = Constants.IMAGE_BASE + movie.backdropPath,
+      builder = {
         transformations(BlurTransformation(context, radius = 25f))
+        crossfade(true)
       },
-      fadeIn = true
     ),
     contentDescription = null,
     modifier = Modifier
@@ -203,9 +203,11 @@ fun DetailsPoster(movie: Movie) {
     elevation = 12.dp
   ) {
     Image(
-      painter = rememberCoilPainter(
-        request = Constants.IMAGE_BASE + movie.posterPath,
-        fadeIn = true
+      painter = rememberImagePainter(
+        data = Constants.IMAGE_BASE + movie.posterPath,
+        builder = {
+          crossfade(true)
+        }
       ),
       contentDescription = null,
       modifier = Modifier.fillMaxSize(),

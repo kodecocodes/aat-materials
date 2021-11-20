@@ -53,7 +53,7 @@ class PopularMoviesFragment : Fragment(R.layout.fragment_popular) {
     inflater: LayoutInflater,
     container: ViewGroup?,
     savedInstanceState: Bundle?,
-  ): View? {
+  ): View {
     return ComposeView(requireContext()).apply {
       setContent {
         CinematicTheme {

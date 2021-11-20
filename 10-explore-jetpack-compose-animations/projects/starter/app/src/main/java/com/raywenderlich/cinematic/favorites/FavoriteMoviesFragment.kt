@@ -52,7 +52,7 @@ class FavoriteMoviesFragment : Fragment(R.layout.fragment_favorites) {
     inflater: LayoutInflater,
     container: ViewGroup?,
     savedInstanceState: Bundle?,
-  ): View? {
+  ): View {
     return ComposeView(requireContext()).apply {
       setContent {
         CinematicTheme {

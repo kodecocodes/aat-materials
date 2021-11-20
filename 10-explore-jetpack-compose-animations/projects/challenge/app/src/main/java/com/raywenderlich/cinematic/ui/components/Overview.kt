@@ -66,7 +66,7 @@ fun Overview(movie: Movie) {
       maxLines = if (overviewExpanded) Int.MAX_VALUE else 4
     )
 
-    if (movie.overview.length > 240) {
+    if (movie.overview.length > 200) {
       Text(
         text = if (overviewExpanded) "READ LESS" else "READ MORE",
         style = MaterialTheme.typography.overline,

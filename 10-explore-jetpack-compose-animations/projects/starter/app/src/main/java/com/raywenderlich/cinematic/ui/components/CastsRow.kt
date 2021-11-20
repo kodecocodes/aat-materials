@@ -42,8 +42,8 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import coil.compose.rememberImagePainter
 import coil.transform.CircleCropTransformation
-import com.google.accompanist.coil.rememberCoilPainter
 import com.raywenderlich.cinematic.model.Cast
 import com.raywenderlich.cinematic.ui.screen.SectionHeader
 import com.raywenderlich.cinematic.util.Constants
@@ -64,9 +64,9 @@ fun CastsRow(casts: List<Cast>?) {
 @Composable
 fun CastItem(profilePath: String) {
   Image(
-    painter = rememberCoilPainter(
-      request = Constants.IMAGE_BASE + profilePath,
-      requestBuilder = {
+    painter = rememberImagePainter(
+      data = Constants.IMAGE_BASE + profilePath,
+      builder = {
         crossfade(true)
         transformations(CircleCropTransformation())
       }
