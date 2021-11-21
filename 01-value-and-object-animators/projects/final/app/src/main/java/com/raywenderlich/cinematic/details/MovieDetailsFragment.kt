@@ -39,6 +39,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.DecelerateInterpolator
 import android.view.animation.OvershootInterpolator
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
@@ -91,13 +92,13 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_details) {
   }
 
   private fun attachObservers() {
-    viewModel.movie.observe(viewLifecycleOwner, { movie ->
+    viewModel.movie.observe(viewLifecycleOwner) { movie ->
       renderUi(movie)
-    })
+    }
 
-    viewModel.cast.observe(viewLifecycleOwner, { cast ->
+    viewModel.cast.observe(viewLifecycleOwner) { cast ->
       castAdapter.submitList(cast)
-    })
+    }
   }
 
   private fun renderUi(movie: Movie) {
@@ -109,7 +110,7 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_details) {
     binding.ratingValue.text = movie.rating.toString()
     binding.movieRating.rating = movie.rating
 
-    animateText(binding.summary)
+    if (viewModel.shouldAnimate) animateText(binding.summary)
 
     binding.addToFavourites.apply {
       icon = if (movie.isFavourite) {
@@ -138,7 +139,9 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_details) {
       .target {
         binding.posterContainer.isVisible = true
         binding.poster.setImageDrawable(it)
-        animatePoster()
+        if (viewModel.shouldAnimate) {
+          animatePoster()
+        }
       }.build()
     requireContext().imageLoader.enqueue(posterRequest)
   }
@@ -150,7 +153,9 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_details) {
       .target {
         binding.backdrop.isVisible = true
         binding.backdrop.setImageDrawable(it)
-        animateBackdrop()
+        if (viewModel.shouldAnimate) {
+          animateBackdrop()
+        }
       }.build()
     requireContext().imageLoader.enqueue(posterRequest)
   }

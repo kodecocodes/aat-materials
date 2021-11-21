@@ -87,13 +87,13 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_details) {
   }
 
   private fun attachObservers() {
-    viewModel.movie.observe(viewLifecycleOwner, { movie ->
+    viewModel.movie.observe(viewLifecycleOwner) { movie ->
       renderUi(movie)
-    })
+    }
 
-    viewModel.cast.observe(viewLifecycleOwner, { cast ->
+    viewModel.cast.observe(viewLifecycleOwner) { cast ->
       castAdapter.submitList(cast)
-    })
+    }
   }
 
   private fun renderUi(movie: Movie) {
@@ -105,7 +105,9 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_details) {
     binding.ratingValue.text = movie.rating.toString()
     binding.movieRating.rating = movie.rating
 
-    //TODO animate the summary
+    if (viewModel.shouldAnimate) {
+      //TODO animate the summary
+    }
 
     binding.addToFavourites.apply {
       icon = if (movie.isFavourite) {
@@ -134,7 +136,9 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_details) {
       .target {
         binding.posterContainer.isVisible = true
         binding.poster.setImageDrawable(it)
-        //TODO animate poster
+        if (viewModel.shouldAnimate) {
+          //TODO animate poster
+        }
       }.build()
     requireContext().imageLoader.enqueue(posterRequest)
   }
@@ -146,7 +150,9 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_details) {
       .target {
         binding.backdrop.isVisible = true
         binding.backdrop.setImageDrawable(it)
-        //TODO animate backdrop
+        if (viewModel.shouldAnimate) {
+          //TODO animate backdrop
+        }
       }.build()
     requireContext().imageLoader.enqueue(posterRequest)
   }
