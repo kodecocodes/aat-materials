@@ -13,9 +13,10 @@
     android:theme="@style/Theme.Cinematic">
     <activity
       android:name="com.raywenderlich.cinematic.login.AuthActivity"
-      android:windowSoftInputMode="adjustResize">
-    </activity>
-    <activity android:name="com.raywenderlich.cinematic.MainActivity" >
+      android:windowSoftInputMode="adjustResize" />
+    <activity
+      android:name="com.raywenderlich.cinematic.MainActivity"
+      android:exported="true">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
 
