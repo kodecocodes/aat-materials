@@ -87,21 +87,21 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_details) {
   }
 
   private fun attachObservers() {
-    viewModel.movie.observe(viewLifecycleOwner, { movie ->
+    viewModel.movie.observe(viewLifecycleOwner) { movie ->
       renderUi(movie)
-    })
+    }
 
-    viewModel.cast.observe(viewLifecycleOwner, { cast ->
+    viewModel.cast.observe(viewLifecycleOwner) { cast ->
       castAdapter.submitList(cast)
-    })
+    }
 
-    viewModel.events.observe(viewLifecycleOwner, { event ->
+    viewModel.events.observe(viewLifecycleOwner) { event ->
       when (event) {
         is Events.Loading -> {
           binding.addToFavorites.showProgress()
         }
       }
-    })
+    }
   }
 
   private fun renderUi(movie: Movie) {
