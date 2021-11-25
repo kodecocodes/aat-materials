@@ -11,6 +11,6 @@
     android:id="@+id/favoriteMoviesFragment"
     android:enabled="true"
     android:icon="@drawable/ic_baseline_favorite_24"
-    android:title="@string/favourites"
+    android:title="@string/favorites"
     app:showAsAction="ifRoom" />
 </menu>

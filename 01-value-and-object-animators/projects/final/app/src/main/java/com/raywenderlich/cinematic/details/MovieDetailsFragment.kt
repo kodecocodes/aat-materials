@@ -39,7 +39,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.DecelerateInterpolator
 import android.view.animation.OvershootInterpolator
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
@@ -112,22 +111,22 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_details) {
 
     if (viewModel.shouldAnimate) animateText(binding.summary)
 
-    binding.addToFavourites.apply {
-      icon = if (movie.isFavourite) {
+    binding.addToFavorites.apply {
+      icon = if (movie.isFavorite) {
         getDrawable(requireContext(), R.drawable.ic_baseline_favorite_24)
       } else {
         getDrawable(requireContext(), R.drawable.ic_baseline_favorite_border_24)
       }
-      text = if (movie.isFavourite) {
-        getString(R.string.remove_from_favourites)
+      text = if (movie.isFavorite) {
+        getString(R.string.remove_from_favorites)
       } else {
-        getString(R.string.add_to_favourites)
+        getString(R.string.add_to_favorites)
       }
       setOnClickListener {
-        if (movie.isFavourite) {
-          viewModel.unsetMovieAsFavourite(movie.id)
+        if (movie.isFavorite) {
+          viewModel.unsetMovieAsFavorite(movie.id)
         } else {
-          viewModel.setMovieAsFavourite(movie.id)
+          viewModel.setMovieAsFavorite(movie.id)
         }
       }
     }
