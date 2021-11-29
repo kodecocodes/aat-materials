@@ -38,7 +38,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.raywenderlich.cinematic.MoviesAdapter
 import com.raywenderlich.cinematic.R
@@ -52,8 +51,8 @@ class FavoriteMoviesFragment : Fragment(R.layout.fragment_favorites) {
   private var _binding: FragmentFavoritesBinding? = null
   private val binding get() = _binding!!
 
-  private val viewModel: FavouriteMoviesViewModel by inject()
-  private val favouritesAdapter: MoviesAdapter by inject()
+  private val viewModel: FavoriteMoviesViewModel by inject()
+  private val favoritesAdapter: MoviesAdapter by inject()
 
   override fun onCreateView(
       inflater: LayoutInflater,
@@ -66,38 +65,38 @@ class FavoriteMoviesFragment : Fragment(R.layout.fragment_favorites) {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    favouritesAdapter.setListener(object : MovieListClickListener {
+    favoritesAdapter.setListener(object : MovieListClickListener {
       override fun onMovieClicked(movie: Movie) {
         findNavController().navigate(
             FavoriteMoviesFragmentDirections.actionFavoriteMoviesFragmentToMovieDetailsFragment(movie.id))
       }
 
     })
-    binding.favouriteMoviesList.apply {
-      adapter = favouritesAdapter
+    binding.favoriteMoviesList.apply {
+      adapter = favoritesAdapter
     }
-    viewModel.getFavouriteMovies()
+    viewModel.getFavoriteMovies()
     attachObservers()
   }
 
   private fun attachObservers() {
-    viewModel.movies.observe(viewLifecycleOwner, { movies ->
-      favouritesAdapter.submitList(movies)
-    })
+    viewModel.movies.observe(viewLifecycleOwner) { movies ->
+      favoritesAdapter.submitList(movies)
+    }
 
-    viewModel.events.observe(viewLifecycleOwner, { event ->
+    viewModel.events.observe(viewLifecycleOwner) { event ->
       when (event) {
         is Events.Loading -> {
           binding.progressBar.visibility = View.VISIBLE
-          binding.favouriteMoviesList.visibility = View.GONE
+          binding.favoriteMoviesList.visibility = View.GONE
         }
 
         is Events.Done -> {
           binding.progressBar.visibility = View.GONE
-          binding.favouriteMoviesList.visibility = View.VISIBLE
+          binding.favoriteMoviesList.visibility = View.VISIBLE
         }
       }
-    })
+    }
   }
 
   override fun onDestroyView() {
