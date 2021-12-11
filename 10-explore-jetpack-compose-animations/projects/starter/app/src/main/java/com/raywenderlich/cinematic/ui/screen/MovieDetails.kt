@@ -56,7 +56,7 @@ import coil.transform.BlurTransformation
 import com.raywenderlich.cinematic.details.MovieDetailsViewModel
 import com.raywenderlich.cinematic.model.Cast
 import com.raywenderlich.cinematic.model.Movie
-import com.raywenderlich.cinematic.ui.components.AddToFavouritesButton
+import com.raywenderlich.cinematic.ui.components.AddToFavoritesButton
 import com.raywenderlich.cinematic.ui.components.CastsRow
 import com.raywenderlich.cinematic.ui.components.RatingBar
 import com.raywenderlich.cinematic.ui.components.RatingStyle
@@ -168,7 +168,7 @@ fun MovieDetailsBody(
 
       CastsRow(casts)
 
-      AddToFavouritesButton(
+      AddToFavoritesButton(
         movie = movie,
         Modifier.padding(vertical = 32.dp),
         contentState,

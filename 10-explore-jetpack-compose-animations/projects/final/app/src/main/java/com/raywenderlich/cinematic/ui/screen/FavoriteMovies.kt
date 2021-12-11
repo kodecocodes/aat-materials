@@ -46,10 +46,10 @@ import com.raywenderlich.cinematic.ui.components.MovieCard
 
 @Composable
 fun FavoriteMovies(viewModel: FavoriteMoviesViewModel, onMovieClicked: (Movie) -> Unit) {
-  val favouriteMovies by viewModel.movies.observeAsState()
+  val favoriteMovies by viewModel.movies.observeAsState()
 
   LazyColumn(contentPadding = PaddingValues(bottom = 64.dp)) {
-    favouriteMovies?.let {
+    favoriteMovies?.let {
       items(it) { movie ->
         MovieCard(movie = movie, onMovieClicked)
       }

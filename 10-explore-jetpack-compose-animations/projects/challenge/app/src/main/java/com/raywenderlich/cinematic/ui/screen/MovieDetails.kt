@@ -163,7 +163,7 @@ fun MovieDetailsBody(
 
       CastsRow(casts)
 
-      AddToFavouritesButton(
+      AddToFavoritesButton(
         movie = movie,
         Modifier.padding(vertical = 32.dp),
         contentState,

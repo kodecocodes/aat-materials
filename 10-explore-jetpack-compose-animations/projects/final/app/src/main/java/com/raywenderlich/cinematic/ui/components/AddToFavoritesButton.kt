@@ -33,7 +33,6 @@
  */
 package com.raywenderlich.cinematic.ui.components
 
-import androidx.compose.animation.animateColor
 import androidx.compose.animation.core.animateDp
 import androidx.compose.animation.core.updateTransition
 import androidx.compose.foundation.layout.*
@@ -59,7 +58,7 @@ enum class ButtonState {
 }
 
 @Composable
-fun AddToFavouritesButton(
+fun AddToFavoritesButton(
   movie: Movie,
   modifier: Modifier = Modifier,
   contentState: Events?,
@@ -83,13 +82,6 @@ fun AddToFavouritesButton(
       }
     }
 
-    val color = transition.animateColor(label = "Button width animation") { state ->
-      when (state) {
-        ButtonState.IDLE -> MaterialTheme.colors.secondary
-        ButtonState.PRESSED -> Color.Cyan
-      }
-    }
-
     buttonState.value = if (contentState is Events.Loading) {
       ButtonState.PRESSED
     } else ButtonState.IDLE
@@ -99,7 +91,7 @@ fun AddToFavouritesButton(
         .size(width.value, 56.dp),
       shape = RoundedCornerShape(32.dp),
       colors = ButtonDefaults.buttonColors(
-        backgroundColor = color.value
+        backgroundColor = MaterialTheme.colors.secondary
       ),
       onClick = {
         onFavoriteButtonClick(movie)

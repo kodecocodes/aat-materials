@@ -33,8 +33,6 @@
  */
 package com.raywenderlich.cinematic.ui.components
 
-import androidx.compose.animation.core.animateDp
-import androidx.compose.animation.core.updateTransition
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -42,8 +40,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -53,12 +49,8 @@ import com.raywenderlich.cinematic.R
 import com.raywenderlich.cinematic.model.Movie
 import com.raywenderlich.cinematic.util.Events
 
-enum class ButtonState {
-  IDLE, PRESSED
-}
-
 @Composable
-fun AddToFavouritesButton(
+fun AddToFavoritesButton(
   movie: Movie,
   modifier: Modifier = Modifier,
   contentState: Events?,
@@ -72,51 +64,44 @@ fun AddToFavouritesButton(
     horizontalAlignment = Alignment.CenterHorizontally
   ) {
 
-    val buttonState = remember { mutableStateOf(ButtonState.IDLE) }
-    val transition = updateTransition(buttonState.value, "Button Transition")
+    if (contentState is Events.Loading) {
+      CircularProgressIndicator(
+        modifier = Modifier.padding(top = 8.dp),
+        strokeWidth = 2.5.dp,
+        color = Color.Black
+      )
+    } else {
+      Button(
+        modifier = Modifier
+          .size(250.dp, 56.dp),
+        shape = RoundedCornerShape(32.dp),
+        colors = ButtonDefaults.buttonColors(
+          backgroundColor = MaterialTheme.colors.secondary
+        ),
+        onClick = {
+          onFavoriteButtonClick(movie)
+        },
+      ) {
 
-    val width = transition.animateDp(label = "Button width animation") { state ->
-      when (state) {
-        ButtonState.IDLE -> 250.dp
-        ButtonState.PRESSED -> 56.dp
-      }
-    }
+        Row(verticalAlignment = Alignment.CenterVertically) {
 
-    buttonState.value = if (contentState is Events.Loading) {
-      ButtonState.PRESSED
-    } else ButtonState.IDLE
-
-    Button(
-      modifier = Modifier
-        .size(width.value, 56.dp),
-      shape = RoundedCornerShape(32.dp),
-      colors = ButtonDefaults.buttonColors(
-        backgroundColor = MaterialTheme.colors.secondary
-      ),
-      onClick = {
-        onFavoriteButtonClick(movie)
-      },
-    ) {
-
-      Row(verticalAlignment = Alignment.CenterVertically) {
-
-        if (buttonState.value == ButtonState.PRESSED) {
-          CircularProgressIndicator(
-            modifier = Modifier.padding(top = 8.dp),
-            strokeWidth = 2.5.dp,
-            color = Color.Black
-          )
-        } else {
           Icon(
-            imageVector = if (movie.isFavorite) Icons.Default.Favorite
-            else Icons.Default.FavoriteBorder, contentDescription = null
+            imageVector = if (movie.isFavorite) {
+              Icons.Default.Favorite
+            } else {
+              Icons.Default.FavoriteBorder
+            },
+            contentDescription = null
           )
 
           Spacer(modifier = Modifier.width(16.dp))
 
           Text(
-            text = if (movie.isFavorite) stringResource(id = R.string.remove_from_favorites)
-            else stringResource(id = R.string.add_to_favorites),
+            text = if (movie.isFavorite) {
+              stringResource(id = R.string.remove_from_favorites)
+            } else {
+              stringResource(id = R.string.add_to_favorites)
+            },
             style = MaterialTheme.typography.button,
             maxLines = 1
           )
