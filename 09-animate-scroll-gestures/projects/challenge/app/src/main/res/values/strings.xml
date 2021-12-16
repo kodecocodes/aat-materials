@@ -1,0 +1,19 @@
+<resources>
+  <string name="app_name">Cinematic</string>
+  <string name="popular">Popular</string>
+  <string name="add_to_favourites">Add to Favorites</string>
+  <string name="remove_from_favourites">Remove from Favorites</string>
+  <string name="header_overview">Overview</string>
+  <string name="header_cast">Cast</string>
+  <string name="new_cinematic">I\'m new to Cinematic</string>
+  <string name="sign_in">Sign in</string>
+  <string name="login">Login</string>
+  <string name="password">Password</string>
+  <string name="email">Email</string>
+  <string name="confirm_password">Confirm Password</string>
+  <string name="sign_up">Sign Up</string>
+  <string name="favourites">Favorites</string>
+  <string name="item_added">Item added to favorites!</string>
+  <string name="item_removed">Item removed from favorites!</string>
+  <string name="scroll_up">Scroll up</string>
+</resources>

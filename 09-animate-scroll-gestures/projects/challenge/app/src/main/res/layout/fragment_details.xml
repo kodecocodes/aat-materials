@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:fitsSystemWindows="true">
+
+  <com.google.android.material.appbar.AppBarLayout
+    android:id="@+id/app_bar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fitsSystemWindows="true">
+
+    <com.google.android.material.appbar.CollapsingToolbarLayout
+      android:id="@+id/toolbar_layout"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:fitsSystemWindows="true"
+      app:contentScrim="?attr/colorPrimary"
+      app:layout_scrollFlags="scroll|exitUntilCollapsed"
+      app:toolbarId="@+id/toolbar">
+
+      <ImageView
+        android:id="@+id/backdrop"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:scaleType="centerCrop"
+        app:layout_collapseMode="parallax" />
+
+      <Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_collapseMode="pin" />
+
+      <RelativeLayout
+        android:id="@+id/ratingContainer"
+        android:layout_width="match_parent"
+        android:alpha="0"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_gravity="bottom|end|center_vertical"
+        app:layout_collapseMode="pin"
+        app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
+
+        <RatingBar
+          android:id="@+id/movieRating"
+          style="@style/Widget.AppCompat.RatingBar.Small"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_centerVertical="true"
+          android:layout_margin="16dp"
+          android:layout_toStartOf="@id/ratingValue"
+          android:elevation="4dp"
+          android:isIndicator="true"
+          android:numStars="5"
+          android:progressTint="@color/colorRating"
+          android:rating="3.5"
+          android:scaleX="1.5"
+          android:scaleY="1.5" />
+
+        <TextView
+          android:id="@+id/ratingValue"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignParentEnd="true"
+          android:layout_centerVertical="true"
+          android:layout_marginStart="16dp"
+          android:layout_marginEnd="16dp"
+          android:elevation="4dp"
+          android:fontFamily="@font/rubik_one"
+          android:letterSpacing="-0.1"
+          android:textColor="?colorOnPrimary"
+          android:textSize="32sp"
+          android:textStyle="bold"
+          tools:text="4.2" />
+      </RelativeLayout>
+
+    </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+  </com.google.android.material.appbar.AppBarLayout>
+
+  <androidx.core.widget.NestedScrollView
+    android:id="@+id/scrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:clipChildren="false">
+
+      <TextView
+        android:id="@+id/overviewHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:elevation="4dp"
+        android:fontFamily="@font/chivo_bold"
+        android:text="@string/header_overview"
+        android:textColor="?colorOnPrimary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/posterContainer" />
+
+      <TextView
+        android:id="@+id/summary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:elevation="4dp"
+        android:fontFamily="@font/chivo_regular"
+        android:maxLines="18"
+        android:textAlignment="textStart"
+        android:textSize="14sp"
+        app:layout_constraintTop_toBottomOf="@id/overviewHeader"
+        tools:text="Birds of Prey (and the Fantabulous Emancipation of One Harley Quinn)[a] is a 2020 American superhero film based on the DC Comics team Birds of Prey. Distributed by Warner Bros. Pictures, it is the eighth installment in the DC Extended Universe and a follow-up to Suicide Squad (2016). It was directed by Cathy Yan and written by Christina Hodson, and it stars Margot Robbie, Mary Elizabeth Winstead, Jurnee Smollett-Bell, Rosie Perez, Chris Messina, Ella Jay Basco, Ali Wong, and Ewan McGregor. The film follows Harley Quinn as she joins forces with Helena Bertinelli, Dinah Lance, and Renee Montoya to save Cassandra Cain from Gotham City crime lord Black Mask. Robbie, who also served as producer, pitched the idea for Birds of Prey to Warner Bros. in 2015. The film was announced in May 2016, with Hodson being hired to write the script that November, followed by Yan signing on to direct in April 2018. The majority of the cast and crew were confirmed by December 2018. Principal photography lasted from January to April 2019 in Downtown Los Angeles, parts of the Arts District, Los Angeles, and soundstages at Warner Bros. Studios in Burbank, California. Additional filming took place in September 2019. Birds of Prey is the first DCEU film and the second DC Films production to be rated R by the Motion Picture Association of America. The film had its world premiere in Mexico City on January 25, 2020, and was theatrically released in the United States in IMAX, Dolby Cinema, and 4DX on February 7, 2020." />
+
+      <TextView
+        android:id="@+id/castHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:elevation="4dp"
+        android:fontFamily="@font/chivo_bold"
+        android:text="@string/header_cast"
+        android:textColor="?colorOnPrimary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/summary" />
+
+      <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/castList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:elevation="4dp"
+        android:minHeight="60dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/castHeader" />
+
+      <com.google.android.material.card.MaterialCardView
+        android:id="@+id/posterContainer"
+        android:layout_width="150dp"
+        android:layout_height="210dp"
+        android:layout_marginTop="32dp"
+        android:elevation="24dp"
+        app:cardCornerRadius="4dp"
+        app:cardElevation="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+          android:id="@+id/poster"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:scaleType="fitXY" />
+      </com.google.android.material.card.MaterialCardView>
+
+      <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/addToFavorites"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="46dp"
+        android:elevation="4dp"
+        android:fontFamily="@font/rubik_regular"
+        android:letterSpacing="0"
+        android:text="@string/add_to_favourites"
+        android:textAllCaps="false"
+        android:textSize="14sp"
+        app:icon="@drawable/ic_baseline_favorite_border_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/castList" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+  </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
